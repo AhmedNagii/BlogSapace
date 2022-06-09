@@ -1,4 +1,6 @@
+const formEl = document.getElementById("new-post") 
 let postsArray = [];
+
 
 function renderPosts() {
   let html = "";
@@ -10,6 +12,7 @@ function renderPosts() {
         `;
   }
   document.getElementById("blog-list").innerHTML = html;
+ 
 }
 
 fetch("https://apis.scrimba.com/jsonplaceholder/posts")
@@ -19,7 +22,7 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts")
     renderPosts(data);
   });
 
-document.getElementById("new-post").addEventListener("submit", (event) => {
+  formEl.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const postTitle = document.getElementById("post-title").value;
@@ -41,5 +44,6 @@ document.getElementById("new-post").addEventListener("submit", (event) => {
     .then((post) => {
       postsArray.unshift(post);
       renderPosts();
+      formEl.reset()
     });
 });
